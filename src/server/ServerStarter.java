@@ -11,7 +11,7 @@ public class ServerStarter implements Serializable
 {
 
     public static void main(String[] args) {
-        FileManager fileManager = new FileManager("collect");
+        FileManager fileManager = new FileManager(System.getenv("COLLECT"));
         CollectionManager collectionManager = new CollectionManager(fileManager);
         CommandManager commandManager = new CommandManager(
                 new AddCommand(collectionManager),

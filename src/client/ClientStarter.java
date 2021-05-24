@@ -20,7 +20,7 @@ public class ClientStarter implements Serializable
         Scanner scanner = new Scanner(System.in);
         Console console = new Console(scanner);
         ClientModule client = new ClientModule("localhost", Port.port, console);
-        client.run("collect");
+        client.run(System.getenv("COLLECT"));
         scanner.close();
     }
 
