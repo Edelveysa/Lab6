@@ -1,5 +1,7 @@
 package common;
 
-public enum CheckCode {
+import java.io.Serializable;
+
+public enum CheckCode implements Serializable {
     ERROR, OKAY, CLOSE_SERVER;
 }

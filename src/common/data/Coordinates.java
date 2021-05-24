@@ -1,12 +1,14 @@
 package common.data;
 
+import java.io.Serializable;
+
 /**
  * Класс Coordinates, класс, который дает координаты (X; Y) человеку.
  *
  * @version 1.0
  */
 
-public class Coordinates
+public class Coordinates implements Serializable
 {
     /**Поле координата Х*/
     private Integer x; //Максимальное значение поля: 841, Поле не может быть null

@@ -4,8 +4,11 @@ import common.Port;
 import server.utility.*;
 import server.сommands.*;
 
+import java.io.Serializable;
 
-public class ServerStarter {
+
+public class ServerStarter implements Serializable
+{
 
     public static void main(String[] args) {
         FileManager fileManager = new FileManager("collect");
@@ -26,7 +29,8 @@ public class ServerStarter {
                 new SaveCommand(collectionManager),
                 new ShowCommand(collectionManager),
                 new SortCommand(collectionManager),
-                new UpdateIdCommand(collectionManager));
+                new UpdateIdCommand(collectionManager),
+                new LoadCollectionCommand(collectionManager));
         RequestManager requestManager = new RequestManager(commandManager);
         ServerModule server = new ServerModule(Port.port, requestManager);
         server.run();

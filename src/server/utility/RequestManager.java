@@ -2,7 +2,9 @@ package server.utility;
 
 import common.*;
 
-public class RequestManager {
+import java.io.Serializable;
+
+public class RequestManager implements Serializable {
     private CommandManager commandManager;
 
     public RequestManager(CommandManager commandManager) {
@@ -14,10 +16,11 @@ public class RequestManager {
         return new Reply(responseCode, ReplyManager.getAndClear());
     }
 
-    private CheckCode executeCommand(String command, String argument, Object objectArgument) {
+    private CheckCode executeCommand(String command, String argument, Object obj) {
         switch (command) {
             case "":
                 break;
+            case "loadCollection":
             case "help":
                 if (!commandManager.help()) return CheckCode.ERROR;
                 break;
@@ -28,10 +31,10 @@ public class RequestManager {
                 if (!commandManager.show()) return CheckCode.ERROR;
                 break;
             case "add":
-                if (!commandManager.add()) return CheckCode.ERROR;
+                if (!commandManager.add(argument, obj)) return CheckCode.ERROR;
                 break;
             case "update_by_id":
-                if (!commandManager.updateById(argument)) return CheckCode.ERROR;
+                if (!commandManager.updateById(argument, obj)) return CheckCode.ERROR;
                 break;
             case "count_less_than_mood":
                 if (!commandManager.countLessMood(argument)) return CheckCode.ERROR;

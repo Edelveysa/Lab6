@@ -273,11 +273,7 @@ public class HumanBeingBuilder implements Serializable
         String name;
         Boolean cool;
         System.out.println("Пора поговорить о машине!");
-        return new Car(
-                askAboutChangingField("Имя машины? Ну или марка, как хотите, только введите:") ?
-                        scanCarName() : null,
-                askAboutChangingField("Машина крутая?") ?
-                        scanCarIsCool() : null);
+        return new Car(scanCarName(), scanCarIsCool());
     }
 
     /**
@@ -289,7 +285,7 @@ public class HumanBeingBuilder implements Serializable
         String s;
         while(true){
             try {
-                askAboutChangingField("Имя машины? Ну или марка, как хотите, только введите:");
+                System.out.println("Имя машины? Ну или марка, как хотите, только введите:");
                 s = scanner.nextLine().trim();
                 if(s.equals("")) throw new UndeclaredVariableException();
                 break;
@@ -309,7 +305,7 @@ public class HumanBeingBuilder implements Serializable
         String s;
         while (true){
             try {
-                askAboutChangingField("Ваша машина крутая?");
+                System.out.println("Ваша машина крутая?");
                 s = scanner.nextLine().trim();
                 if(s.equals("Да") || s.equals("да") || s.equals("yes") || s.equals("Yes") || s.equals("+")){
                     return Boolean.TRUE;
@@ -340,7 +336,7 @@ public class HumanBeingBuilder implements Serializable
         while (true) {
             try {
                 System.out.println(res);
-                System.out.print(">");
+                System.out.print("~ ");
                 answer = scanner.nextLine().trim();
                 if (fileMode) System.out.println(answer);
                 if (!answer.equals("+") && !answer.equals("-")) throw new NotDeclaredValueException();

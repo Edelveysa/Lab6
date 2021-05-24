@@ -14,7 +14,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.util.Set;
 
-public class ClientModule
+public class ClientModule implements Serializable
 {
         private String host;
         private int port;
@@ -52,7 +52,8 @@ public class ClientModule
                     System.out.print(serverResponse.getReplyBody());
                 } while(!requestToServer.getCommandName().equals("exit"));
             } catch (IOException | ClassNotFoundException exception) {
-                System.out.println("Произошла ошибка при работе с сервером!");
+//                System.out.println("Произошла ошибка при работе с сервером!");
+                exception.printStackTrace();
                 System.exit(0);
             }
         }

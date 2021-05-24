@@ -5,9 +5,11 @@ import common.Port;
 import common.exceptions.NotDeclaredValueException;
 import common.exceptions.WrongAmountOfParametersException;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class ClientStarter {
+public class ClientStarter implements Serializable
+{
     private static String host;
     private static int port;
     private static String fileName;

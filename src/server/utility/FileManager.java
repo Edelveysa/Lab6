@@ -4,10 +4,8 @@ import common.data.HumanBeing;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -17,7 +15,7 @@ import java.util.*;
  * @version 1.1
  */
 
-public class FileManager
+public class FileManager implements Serializable
 {
     /** Поле объект Gson*/
     private Gson gson = new Gson();

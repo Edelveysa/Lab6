@@ -32,11 +32,11 @@ public class AddCommand extends AbstractCommand
     @Override
     public boolean execute(String arg, Object obj)
     {
+        System.out.println("Элемент добавлен в 42343 коллекцию.\n");
         try{
-            if (arg.isEmpty() || obj == null) throw new EmptyExecuteArgumentException();
+            if (obj == null) throw new EmptyExecuteArgumentException();
             HumanBeingLite humanLite = (HumanBeingLite) obj;
-            collectionManager.addToCollection(
-                    new HumanBeing(
+            collectionManager.addToCollection(new HumanBeing(
                             collectionManager.generateID(),
                             humanLite.getName(),
                             humanLite.getCoordinates(),
@@ -49,6 +49,8 @@ public class AddCommand extends AbstractCommand
                             humanLite.getCar()
                     )
             );
+//            collectionManager.addToCollection(humanLite);
+            System.out.println("Элемент добавлен в 4343 коллекцию.\n");
             ReplyManager.append("Элемент добавлен в коллекцию.\n");
             return true;
         }catch (Exception e)

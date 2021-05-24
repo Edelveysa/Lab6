@@ -1,5 +1,6 @@
 package server.сommands;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Objects;
  * @version 1.2
  */
 
-public abstract class AbstractCommand
+public abstract class AbstractCommand implements Serializable
 {
     /** Поле имя команды */
     private String name;

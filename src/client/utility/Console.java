@@ -7,6 +7,7 @@ import server.utility.CommandManager;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -15,7 +16,7 @@ import java.util.*;
  * @version 1.1
  */
 
-public class Console
+public class Console implements Serializable
 {
     /** Поле объект менеджера комманд*/
     private CommandManager commandManager;
@@ -66,7 +67,7 @@ public class Console
                             System.out.println(userInput);
                         }
                     } else {
-                        System.out.print("$ ");
+                        System.out.print("\n~ ");
                         userInput = scanner.nextLine();
                     }
                     userCommand = (userInput.trim() + " ").split(" ", 2);
@@ -80,8 +81,8 @@ public class Console
             try {
                 switch (processCode) {
                     case OBJECT:
-                        HumanBeingLite insertHuman = generateAddHuman();
-                        return new Request(userCommand[0], userCommand[1], insertHuman);
+                        HumanBeingLite addHuman = generateAddHuman();
+                        return new Request(userCommand[0], userCommand[1], addHuman);
                     case UPDATE:
                         HumanBeingLite updateHuman = generateUpdateHuman();
                         return new Request(userCommand[0], userCommand[1], updateHuman);
@@ -141,17 +142,12 @@ public class Console
                 case "sort":
                 case "print_field_descending_impact_speed":
                 case "exit":
-                    if (!argument.isEmpty()) throw new EmptyExecuteArgumentException();
+                case "remove_first":
+                if (!argument.isEmpty()) throw new EmptyExecuteArgumentException();
                     return ProcessCode.OK;
                 case "add":
                 case "add_if_max":
-                case "filter_starts_with_soundtrack_name":
-                case "remove_by_id":
-                case "count_less_than_mood":
                     if (argument.isEmpty()) throw new EmptyExecuteArgumentException();
-                    return ProcessCode.OBJECT;
-                case "remove_first":
-                    if (!argument.isEmpty()) throw new EmptyExecuteArgumentException();
                     return ProcessCode.OBJECT;
                 case "update_by_id":
                     if (argument.isEmpty()) throw new EmptyExecuteArgumentException();
@@ -159,6 +155,11 @@ public class Console
                 case "execute_script":
                     if (argument.isEmpty()) throw new EmptyExecuteArgumentException();
                     return ProcessCode.SCRIPT_MODE;
+                case "count_less_than_mood":
+                case "filter_starts_with_soundtrack_name":
+                case "remove_by_id":
+                    if (argument.isEmpty()) throw new WrongAmountOfParametersException();
+                    return ProcessCode.OK;
                 default:
                     System.out.println("Такой команды нет. Попробуйте 'help'.");
                     return ProcessCode.ERROR;
@@ -202,19 +203,19 @@ public class Console
                 builder.scanName() : null;
         Coordinates coordinates = builder.askAboutChangingField("Изменить координаты человека?") ?
                 builder.scanCoordinates() : null;
-        Boolean realHero = builder.askAboutChangingField("Человек - герой?") ?
+        Boolean realHero = builder.askAboutChangingField("Изменить статус героя?") ?
                 builder.scanRealHero() : null;
-        Boolean hasToothpick = builder.askAboutChangingField("Имеется зубочистка?") ?
+        Boolean hasToothpick = builder.askAboutChangingField("Изменить наличие зубочистки?") ?
                 builder.scanHasToothPick() : null;
-        long impactSpeed = builder.askAboutChangingField("Какая скорость удара?") ?
-                builder.scanImpactSpeed() : null;
-        String soundtrackName = builder.askAboutChangingField("Какой саундтрек у человека?") ?
+        long impactSpeed = builder.askAboutChangingField("Изменить скорость удара?") ?
+                builder.scanImpactSpeed() : -1;
+        String soundtrackName = builder.askAboutChangingField("Изменить саундтрек у человека?") ?
                 builder.scanSoundtrackName() : null;
-        Integer minutesOfWaiting = builder.askAboutChangingField("Сколько времени ожидания?") ?
-                builder.scanMinutesOfWaiting() : null;
-        Mood mood = builder.askAboutChangingField("Какое настроение? Варианты: апатия, горе, мрак, гнев.") ?
+        Integer minutesOfWaiting = builder.askAboutChangingField("Изменить временя ожидания?") ?
+                builder.scanMinutesOfWaiting() : -1;
+        Mood mood = builder.askAboutChangingField("Изменить настроение?") ?
                 builder.scanMood() : null;
-        Car car = builder.askAboutChangingField("Как дела с машиной?") ?
+        Car car = builder.askAboutChangingField("Изменить машину?") ?
                 builder.scanCar() : null;
 
         return new HumanBeingLite(

@@ -1,6 +1,8 @@
 package common;
 
-public class Reply
+import java.io.Serializable;
+
+public class Reply implements Serializable
 {
 
     private CheckCode code;

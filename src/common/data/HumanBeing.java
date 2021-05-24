@@ -1,5 +1,6 @@
 package common.data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -9,7 +10,7 @@ import java.util.Objects;
  * @version 1.0
  */
 
-public class HumanBeing
+public class HumanBeing  implements Serializable
 {
 
         private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически

@@ -1,12 +1,14 @@
 package common.data;
 
+import java.io.Serializable;
+
 /**
  * Класс Car, который говорит о машине человека.
  *
  * @version 1.0
  */
 
-public class Car
+public class Car implements Serializable
 {
     /** Поле имя */
     private String name; //Поле не может быть null

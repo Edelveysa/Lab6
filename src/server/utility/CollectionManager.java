@@ -3,6 +3,7 @@ package server.utility;
 import common.data.HumanBeing;
 import common.data.Mood;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -12,7 +13,7 @@ import java.util.*;
  * @version 1.1
  */
 
-public class CollectionManager
+public class CollectionManager implements Serializable
 {
     /** Поле FileManager*/
     private FileManager fileManager;
@@ -32,7 +33,7 @@ public class CollectionManager
      * Загрузка коллекции из файла.
      */
 
-    private void loadCollection()
+    public void loadCollection()
     {
         this.time = LocalDateTime.now();
         this.humans = fileManager.read();
@@ -187,12 +188,17 @@ public class CollectionManager
 
     public void removeByIdInCollection(int id)
     {
+        humans.remove(findElementInCollection(id));
+    }
+
+    public HumanBeing findElementInCollection(int id)
+    {
         HumanBeing human = humans
-                            .stream()
-                            .filter(obj -> (obj.getId() == id))
-                            .findFirst()
-                            .orElse(null);
-        humans.remove(human);
+                .stream()
+                .filter(obj -> (obj.getId() == id))
+                .findFirst()
+                .orElse(null);
+        return human;
     }
 
     /**

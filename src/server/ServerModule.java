@@ -11,7 +11,8 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-public class ServerModule {
+public class ServerModule implements Serializable
+{
     private int port;
     private RequestManager requestManager;
     private DatagramSocket socket;
@@ -23,8 +24,13 @@ public class ServerModule {
         this.requestManager = requestManager;
     }
 
-    public void run() {
+    public void run(){
         System.out.println("Запуск сервера!");
+        try {
+            socket = new DatagramSocket(Port.port);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
         boolean processStatus = true;
         scanner = new Scanner(System.in);
         Runnable userInput = () -> {
@@ -52,7 +58,6 @@ public class ServerModule {
         Request request = null;
         Reply response = null;
         try {
-            socket = new DatagramSocket(Port.port);
             scanner = new Scanner(System.in);
             do {
                 request = getRequest();
@@ -98,10 +103,11 @@ public class ServerModule {
     }
 
     private byte[] serialize(Reply response) throws IOException {
+        byte[] buffer = null;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(response);
-        byte[] buffer = byteArrayOutputStream.toByteArray();
+        buffer = byteArrayOutputStream.toByteArray();
         objectOutputStream.flush();
         byteArrayOutputStream.flush();
         byteArrayOutputStream.close();

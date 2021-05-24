@@ -37,7 +37,7 @@ public class UpdateIdCommand extends AbstractCommand
             if(arg.isEmpty()) throw new EmptyExecuteArgumentException();
             if (collectionManager.getHumans().size() == 0) throw new EmptyCollectionException();
             HumanBeingLite newHuman = (HumanBeingLite) obj;
-            HumanBeing oldHuman = collectionManager.getHumans().get(Integer.parseInt(arg));
+            HumanBeing oldHuman = collectionManager.findElementInCollection(Integer.parseInt(arg));
             String name = newHuman.getName() == null ? oldHuman.getName() : newHuman.getName();
             Coordinates coordinates = newHuman.getCoordinates() == null ? oldHuman.getCoordinates() : newHuman.getCoordinates();
             Boolean realHero = newHuman.getRealHero() == null ? oldHuman.getRealHero() : newHuman.getRealHero();

@@ -1,5 +1,6 @@
 package server.utility;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import server.сommands.*;
@@ -10,7 +11,7 @@ import server.сommands.*;
  * @version 1.1
  */
 
-public class CommandManager
+public class CommandManager implements Serializable
 {
     /** Поле список команд */
     private static List<AbstractCommand> commands = new ArrayList<>();
@@ -46,12 +47,13 @@ public class CommandManager
     private SortCommand sortCommand;
     /** Поле команда update_by_id*/
     private UpdateIdCommand updateIdCommand;
+    private LoadCollectionCommand loadCollectionCommand;
 
-    public CommandManager( AddCommand addCommand, AddIfMaxCommand addIfMaxCommand, ClearCommand clearCommand, CountLessThanMoodCommand countLessThanMoodCommand,
-                                ExecuteScriptCommand executeScriptCommand, ExitCommand exitCommand, FilterStartsWithSoundNameCommand filterStartWithSoundNameCommand,
-                                HelpCommand helpCommand, InfoCommand infoCommand, PrintFieldDescendingImpactSpeedCommand printFieldDescendingImpactSpeedCommand,
-                                RemoveByIdCommand removeByIdCommand, RemoveFirstCommand removeFirstCommand, SaveCommand saveCommand, ShowCommand showCommand,
-                                SortCommand sortCommand, UpdateIdCommand updateIdCommand)
+    public CommandManager(AddCommand addCommand, AddIfMaxCommand addIfMaxCommand, ClearCommand clearCommand, CountLessThanMoodCommand countLessThanMoodCommand,
+                          ExecuteScriptCommand executeScriptCommand, ExitCommand exitCommand, FilterStartsWithSoundNameCommand filterStartWithSoundNameCommand,
+                          HelpCommand helpCommand, InfoCommand infoCommand, PrintFieldDescendingImpactSpeedCommand printFieldDescendingImpactSpeedCommand,
+                          RemoveByIdCommand removeByIdCommand, RemoveFirstCommand removeFirstCommand, SaveCommand saveCommand, ShowCommand showCommand,
+                          SortCommand sortCommand, UpdateIdCommand updateIdCommand, LoadCollectionCommand loadCollectionCommand)
     {
         this.addCommand = addCommand;
         this.addIfMaxCommand = addIfMaxCommand;
@@ -69,6 +71,8 @@ public class CommandManager
         this.showCommand = showCommand;
         this.sortCommand = sortCommand;
         this.updateIdCommand = updateIdCommand;
+        this.loadCollectionCommand = loadCollectionCommand;
+
 
         commands.add(addCommand);
         commands.add(addIfMaxCommand);
@@ -86,6 +90,7 @@ public class CommandManager
         commands.add(showCommand);
         commands.add(sortCommand);
         commands.add(updateIdCommand);
+        commands.add(loadCollectionCommand);
 
     }
 
@@ -143,18 +148,18 @@ public class CommandManager
      * Исполнение команды add.
      * @return Статус выполнения команды.
      */
-    public boolean add()
+    public boolean add(String s, Object obj)
     {
-        return addCommand.execute();
+        return addCommand.execute(s, obj);
     }
 
     /**
      * Исполнение команды update_by_id.
      * @return Статус выполнения команды.
      */
-    public boolean updateById(String arg)
+    public boolean updateById(String arg, Object obj)
     {
-        return updateIdCommand.execute(arg);
+        return updateIdCommand.execute(arg, obj);
     }
 
     /**

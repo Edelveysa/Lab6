@@ -1,12 +1,14 @@
 package common.data;
 
+import java.io.Serializable;
+
 /**
  * Enum Mood, отвечающий за настроение человека.
  *
  * @version 1.0
  */
 
-public enum Mood
+public enum Mood implements Serializable
 {
     SORROW("sorrow", 1),
     GLOOM("gloom", 2),

@@ -1,6 +1,8 @@
 package server.utility;
 
-public interface ReplyManager {
+import java.io.Serializable;
+
+public interface ReplyManager{
     static StringBuilder stringBuilder = new StringBuilder();
 
     public static void append(Object o) {

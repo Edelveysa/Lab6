@@ -1,5 +1,7 @@
 package client.utility;
 
-public enum ProcessCode {
+import java.io.Serializable;
+
+public enum ProcessCode  implements Serializable {
     OK, ERROR, OBJECT, UPDATE, SCRIPT_MODE;
 }
