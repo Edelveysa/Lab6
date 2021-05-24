@@ -1,25 +1,24 @@
 package client;
 
-import client.utility.*;
-import common.exceptions.*;
+import client.utility.Console;
+import common.Port;
+import common.exceptions.NotDeclaredValueException;
+import common.exceptions.WrongAmountOfParametersException;
 
 import java.util.Scanner;
 
-public class ClientStarter
-{
+public class ClientStarter {
     private static String host;
     private static int port;
     private static String fileName;
 
     public static void main(String[] args) {
         //if (!checkArgs(args)) return;
-        System.out.println("Запуск клиента!");
+        System.out.println("Клиент запущен");
         Scanner scanner = new Scanner(System.in);
         Console console = new Console(scanner);
-        System.out.println("Введите имя файла колллекции:");
-        fileName = scanner.nextLine();
-        ClientModule client = new ClientModule("localhost", 6112, console);
-        client.run(fileName);
+        ClientModule client = new ClientModule("localhost", Port.port, console);
+        client.run("collect");
         scanner.close();
     }
 
@@ -43,5 +42,4 @@ public class ClientStarter
         }
         return false;
     }
-
 }
