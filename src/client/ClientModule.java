@@ -52,8 +52,7 @@ public class ClientModule implements Serializable
                     System.out.print(serverResponse.getReplyBody());
                 } while(!requestToServer.getCommandName().equals("exit"));
             } catch (IOException | ClassNotFoundException exception) {
-//                System.out.println("Произошла ошибка при работе с сервером!");
-                exception.printStackTrace();
+                System.out.println("Произошла ошибка при работе с сервером!");
                 System.exit(0);
             }
         }

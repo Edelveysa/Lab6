@@ -4,6 +4,7 @@ import common.Port;
 import server.utility.*;
 import server.сommands.*;
 
+import java.io.File;
 import java.io.Serializable;
 
 
@@ -11,7 +12,8 @@ public class ServerStarter implements Serializable
 {
 
     public static void main(String[] args) {
-        FileManager fileManager = new FileManager(System.getenv("COLLECT"));
+       FileManager fileManager = new FileManager(System.getenv("COLLECT"));
+//        FileManager fileManager = new FileManager("collect");
         CollectionManager collectionManager = new CollectionManager(fileManager);
         CommandManager commandManager = new CommandManager(
                 new AddCommand(collectionManager),

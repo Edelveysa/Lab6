@@ -25,10 +25,11 @@ public class ExecuteScriptCommand extends AbstractCommand
     public boolean execute(String arg) {
         try {
             if (arg.isEmpty()) throw new EmptyExecuteArgumentException();
-            ReplyManager.append("Скрипт выполняется! Возможны технические сообщения.");
+            ReplyManager.append("Скрипт выполняется! Возможны технические сообщения.\n");
             return true;
         } catch (EmptyExecuteArgumentException exception) {
-            ReplyManager.appendError("У этой команды нет параметров!");
+            exception.printStackTrace();
+            ReplyManager.appendError("У этой команды нет параметров!\n");
         }
         return false;
     }

@@ -52,7 +52,9 @@ public class Console implements Serializable
         try {
             do {
                 try {
-                    if (fileMode() && (serverCode == CheckCode.CLOSE_SERVER || serverCode == CheckCode.ERROR)) {
+                    if (fileMode() && (serverCode == CheckCode.CLOSE_SERVER)) {
+                        System.out.println(fileMode());
+                        System.out.println(serverCode);
                         throw new IncorrectInputInScriptException();
                     }
                     while (fileMode() && !scanner.hasNextLine()) {
@@ -87,6 +89,7 @@ public class Console implements Serializable
                         HumanBeingLite updateHuman = generateUpdateHuman();
                         return new Request(userCommand[0], userCommand[1], updateHuman);
                     case SCRIPT_MODE:
+                        System.out.println(434);
                         File scriptFile = new File(userCommand[1]);
                         if (!scriptFile.exists()) throw new FileNotFoundException();
                         if (!scriptFileNames.isEmpty() && scriptFileNames.search(scriptFile) != -1) {
@@ -105,6 +108,7 @@ public class Console implements Serializable
                 throw new IncorrectInputInScriptException();
             }
         } catch (IncorrectInputInScriptException exception) {
+            exception.printStackTrace();
             System.out.println("Выполнение скрипта прервано!");
             while (!scannerStack.isEmpty()) {
                 scanner.close();

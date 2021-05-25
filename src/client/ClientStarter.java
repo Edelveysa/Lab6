@@ -15,12 +15,12 @@ public class ClientStarter implements Serializable
     private static String fileName;
 
     public static void main(String[] args) {
-        //if (!checkArgs(args)) return;
-        System.out.println("Клиент запущен");
+        System.out.println("Запуск клиента!");
         Scanner scanner = new Scanner(System.in);
         Console console = new Console(scanner);
         ClientModule client = new ClientModule("localhost", Port.port, console);
         client.run(System.getenv("COLLECT"));
+//        client.run("collect");
         scanner.close();
     }
 
